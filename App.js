@@ -1,10 +1,9 @@
 // DESIGN -- https://www.behance.net/gallery/154684659/Recipe-App-(UXUI-App-Design)
 
-// import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, StatusBar} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 // Icons
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -25,39 +24,41 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
-        <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarShowLabel: false, // hide text labels under icons
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
+      <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: 'green'}}>
+        <NavigationContainer>
+          <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarShowLabel: false, // hide text labels under icons
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
 
-            if (route.name === 'Home') {
-              iconName = focused ? 'home' : 'home-outline';
+              if (route.name === 'Home') {
+                iconName = focused ? 'home' : 'home-outline';
 
-            } else if (route.name === 'Search') {
-              iconName = focused ? 'search' : 'search-outline';
+              } else if (route.name === 'Search') {
+                iconName = focused ? 'search' : 'search-outline';
 
-            } else if (route.name === 'Favourites') {
-              iconName = focused ? 'heart' : 'heart-outline';
+              } else if (route.name === 'Favourites') {
+                iconName = focused ? 'heart' : 'heart-outline';
 
-            } else if (route.name === 'My Profile') {
-              iconName = focused ? 'person' : 'person-outline';
-            }
+              } else if (route.name === 'My Profile') {
+                iconName = focused ? 'person' : 'person-outline';
+              }
 
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-          tabBarActiveTintColor: 'tomato',
-          tabBarInactiveTintColor: 'gray',
-        })}>
-          <Tab.Screen name="Home" component={HomeScreen} 
-          options={{headerShown: false }}
-          />
-          <Tab.Screen name="Search" component={SearchScreen} />
-          <Tab.Screen name="Favourites" component={FavouritesScreen} />
-          <Tab.Screen name="My Profile" component={ProfileScreen} />
-        </Tab.Navigator>
-      </NavigationContainer>
+              return <Ionicons name={iconName} size={size} color={color} />;
+            },
+            tabBarActiveTintColor: 'tomato',
+            tabBarInactiveTintColor: 'gray',
+          })}>
+            <Tab.Screen name="Home" component={HomeScreen} 
+            options={{headerShown: false }}
+            />
+            <Tab.Screen name="Search" component={SearchScreen} />
+            <Tab.Screen name="Favourites" component={FavouritesScreen} />
+            <Tab.Screen name="My Profile" component={ProfileScreen} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
     </SafeAreaProvider>
   );
 }
